@@ -8,11 +8,11 @@ jobs:
       - checkout
       - run: mvn -B -DskipTests clean package
       - store_artifacts:
-            - run:
+      - run:
           name: Save test results
           command: |
             mkdir -p ~/bin/final_build/  
-         path: /bin/final_build
+            path: /bin/final_build
 
   test:
     docker:
