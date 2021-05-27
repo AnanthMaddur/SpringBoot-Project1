@@ -7,18 +7,12 @@ jobs:
     steps:
       - checkout
       - run: mvn -B -DskipTests clean package
-      - persist_to_workspace:
-         root: ./
-         paths:
-           - target/ 
 
   test:
     docker:
       - image: circleci/openjdk:11.0
     steps:
       - checkout
-      - attach_workspace:
-          at: ./target
       - run: mvn test
       - run:
           name: Save test results
