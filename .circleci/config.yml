@@ -11,6 +11,15 @@ jobs:
          root: ./
          paths:
            - target/ 
+
+  test:
+    docker:
+      - image: circleci/openjdk:11.0
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ./target
+      - run: mvn test
       - run:
           name: Save test results
           command: |
@@ -21,14 +30,6 @@ jobs:
           path: ~/test-results
       - store_artifacts:
           path: ~/test-results/junit
-  test:
-    docker:
-      - image: circleci/openjdk:11.0
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ./target
-      - run: mvn test
 
 workflows:
   version: 2
