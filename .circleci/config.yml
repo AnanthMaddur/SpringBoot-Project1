@@ -20,6 +20,14 @@ jobs:
       - attach_workspace:
           at: ./target
       - run: mvn test
+  persist the code: 
+    docker:
+      - image: circleci/openjdk:11.0
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ./target
+      - run: mvn clean install
 
 workflows:
   version: 2
