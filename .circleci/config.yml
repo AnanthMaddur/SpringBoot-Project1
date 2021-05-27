@@ -11,17 +11,6 @@ jobs:
          root: ./
          paths:
            - target/
-
-   test:
-    docker:
-      - image: circleci/openjdk:11.0
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ./target
-      - run: mvn test
-    working_directory: /tmp
-    steps:
       - run:
           name: Creating Dummy Artifacts
           command: |
@@ -35,6 +24,15 @@ jobs:
 
       - store_artifacts:
           path: /tmp/artifacts
+
+  test:
+    docker:
+      - image: circleci/openjdk:11.0
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ./target
+      - run: mvn test
 
 workflows:
   version: 2
