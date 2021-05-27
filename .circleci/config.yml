@@ -30,7 +30,19 @@ jobs:
           path: ~/test-results
       - store_artifacts:
           path: ~/test-results/junit
-
+  upload the Artifacts: 
+     docker:
+      - image: circleci/openjdk:11.0
+    steps:
+      - checkout
+      - run:
+          name: Uploading the Artifacts
+          command: |
+            mkdir -p ~/PublishedArtifacts
+      - store_artifacts:
+          path: ~/PublishedArtifacts
+      - run: mvn clean install
+   
 workflows:
   version: 2
 
