@@ -7,11 +7,11 @@ jobs:
     steps:
       - checkout
       - run: mvn -B -DskipTests clean package
-      - store_artifacts:
       - run:
           name: Save test results
           command: |
             mkdir -p ~/bin/final_build/  
+      - store_artifacts:
             path: /bin/final_build
 
   test:
