@@ -7,6 +7,12 @@ jobs:
     steps:
       - checkout
       - run: mvn -B -DskipTests clean package
+      - store_artifacts:
+            - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/bin/final_build/  
+         path: /bin/final_build
 
   test:
     docker:
@@ -24,18 +30,6 @@ jobs:
           path: ~/test-results
       - store_artifacts:
           path: ~/test-results/junit
-    upload the Artifacts: 
-     docker:
-      - image: circleci/openjdk:11.0
-     steps:
-      - checkout
-      - run:
-          name: Uploading the Artifacts
-          command: |
-            mkdir -p ~/PublishedArtifacts/
-      - store_artifacts:
-          path: ~/PublishedArtifacts
-      - run: mvn clean deploy
    
 workflows:
   version: 2
