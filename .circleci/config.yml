@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run: mvn -B -DskipTests clean package
       - run:
-          name: Save test results
+          name: Store the Artifacts
           command: |
             mkdir -p ~/bin/final_build/  
       - store_artifacts:
